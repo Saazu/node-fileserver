@@ -7,10 +7,11 @@ const app = express();
 
 //Logging middleware
 app.use(morgan("short"));
+console.log("Error handling branch")
 
 //Middleware to serve file if file exists
 app.use(function (request, response, next) {
-  const filePath = path.join(__dirname, "static", res.url)
+  const filePath = path.join(__dirname, "static", request.url)
   response.sendFile(filePath, function(err) {
     if (err) {
       next(new Error("Error sending file"));
