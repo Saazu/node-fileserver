@@ -6,31 +6,11 @@ const morgan = require('morgan')
 const app = express();
 
 //Logging middleware
-/**
- * 
-  app.use(function(request, response, next) {
-    console.log(`Request IP: ${request.ip} ${request.url}`);
-    console.log(`Request date: ${new Date()}`);
-    next();
-  });
- */
 app.use(morgan("short"))
 
 //Middleware to serve file if file exists
-app.use(function(request, response, next) {
-  var filePath = path.join(__dirname, "static", request.url)
-  fs.stat(filePath, function(err, fileInfo) {
-    if (err) {
-      next();
-      return;
-    }
-    if (fileInfo.isFile()) {
-      response.sendFile(filePath);
-    } else {
-      next();
-    }
-  });
-});
+const staticFilePath = path.join(__dirname, "static")
+app.use(express.static(staticFilePath))
 
 //404 Middleware
 app.use(function(request, response) {
