@@ -6,15 +6,7 @@ const morgan = require('morgan')
 const app = express();
 
 //Logging middleware
-/**
- * 
-  app.use(function(request, response, next) {
-    console.log(`Request IP: ${request.ip} ${request.url}`);
-    console.log(`Request date: ${new Date()}`);
-    next();
-  });
- */
-app.use(morgan("short"))
+app.use(morgan("short"));
 
 //Middleware to serve file if file exists
 app.use(function(request, response, next) {
